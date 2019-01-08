@@ -1,0 +1,16 @@
+version: "3.4"
+services:
+  perlcryptblowfish:
+    command: /usr/bin/rpmbuild -ba perl-Crypt-Blowfish.spec
+    volumes:
+      - rpms:/home/centos/rpmbuild/SRPMS
+      - rpm7:/home/centos/rpmbuild/RPMS
+    build:
+      context: .
+    image: rpmbuild:7-perlcryptblowfish
+
+volumes:
+  rpms:
+    name: rpms
+  rpm7:
+    name: rpm7
