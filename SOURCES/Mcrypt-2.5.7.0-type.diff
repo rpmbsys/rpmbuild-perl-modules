@@ -1,0 +1,11 @@
+--- Mcrypt.xs
++++ Mcrypt.xs
+@@ -249,7 +249,7 @@
+ CR_ERROR(mcrypt)
+ 	MCRYPT mcrypt
+ 	CODE:
+-	  RETVAL = newSVpv((char *)mcrypt_strerror((int)mcrypt), 0);
++	  RETVAL = newSVpv((char *)mcrypt_strerror((long)mcrypt), 0);
+ 	OUTPUT:
+ 	  RETVAL
+ 

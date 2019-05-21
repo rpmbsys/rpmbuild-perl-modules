@@ -16,6 +16,15 @@ services:
     build:
       context: .
     image: rpmbuild:7-perlmd5
+  perlmcrypt:
+    command: /usr/bin/rpmbuild -ba perl-Mcrypt.spec
+    volumes:
+      - rpms:/home/centos/rpmbuild/SRPMS
+      - rpm7:/home/centos/rpmbuild/RPMS
+    build:
+      context: .
+      dockerfile: Dockerfile.mcrypt
+    image: rpmbuild:7-perlmcrypt
 
 volumes:
   rpms:
