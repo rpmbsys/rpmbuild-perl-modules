@@ -1,10 +1,4 @@
-FROM aursu/rpmbuild:7-build
-
-USER root
-RUN yum -y install \
-        perl-Crypt-CBC \
-        perl-ExtUtils-MakeMaker \
-    && yum clean all && rm -rf /var/cache/yum
+FROM aursu/perlbuild:7-base
 
 COPY SOURCES ${BUILD_TOPDIR}/SOURCES
 COPY SPECS ${BUILD_TOPDIR}/SPECS

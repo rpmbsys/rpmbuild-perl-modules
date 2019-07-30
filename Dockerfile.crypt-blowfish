@@ -1,7 +1,7 @@
 FROM aursu/perlbuild:7-base
 
 RUN yum -y install \
-        libmcrypt-devel \
+        perl-Crypt-CBC \
     && yum clean all && rm -rf /var/cache/yum
 
 COPY SOURCES ${BUILD_TOPDIR}/SOURCES
