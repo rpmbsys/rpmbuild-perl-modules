@@ -1,13 +1,13 @@
 Summary:    XS Blowfish implementation for Perl
 Name:       perl-Crypt-Blowfish
 Version:    2.14
-Release:    4%{?dist}
+Release:    5%{?dist}
 # _blowfish.c:  Copyright only
 # COPYRIGHT:    BSD with advertisment clause
 License:    BSD and Copyright only
 Group:      Development/Libraries
-URL:        http://search.cpan.org/dist/Crypt-Blowfish/
-Source0:    http://search.cpan.org/CPAN/authors/id/D/DP/DPARIS/Crypt-Blowfish-%{version}.tar.gz
+URL:        https://metacpan.org/pod/Crypt::Blowfish
+Source0:    https://cpan.metacpan.org/authors/id/D/DP/DPARIS/Crypt-Blowfish-%{version}.tar.gz
 BuildRequires:  coreutils
 BuildRequires:  findutils
 BuildRequires:  gcc
@@ -57,6 +57,9 @@ make test
 %{_mandir}/man3/*.3*
 
 %changelog
+* Tue Jul 30 2019 Alexander Ursu <alexander.ursu@gmail.com> - 2.14-5
+- updated package URL and Source URL
+
 * Tue Jan  8 2019 Alexander Ursu <aursu@hostopia.com> - 2.14-4
 - Rebuild for CentOS 7
 

@@ -1,11 +1,11 @@
 Name:           perl-MD5
 Version:        2.03
-Release:        21%{?dist}
+Release:        23%{?dist}
 Summary:        Perl interface to the MD5 Message-Digest Algorithm
 License:        GPL+ or Artistic
 Group:          Development/Libraries
-URL:            http://search.cpan.org/dist/MD5/
-Source0:        http://www.cpan.org/modules/by-module/MD5/GAAS/MD5-%{version}.tar.gz
+URL:            https://metacpan.org/pod/MD5
+Source0:        https://cpan.metacpan.org/authors/id/G/GA/GAAS/MD5-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  perl(Digest::MD5) >= 2.00
@@ -47,6 +47,9 @@ rm -rf %{buildroot}
 %{_mandir}/man3/*
 
 %changelog
+* Tue Jul 30 2019 Alexander Ursu <alexander.ursu@gmail.com> - 2.03-23
+- updated package URL and Source URL
+
 * Tue Jan  8 2019 Alexander Ursu <aursu@hostopia.com> - 2.03-22
 - Rebuild for CentOS7 based on FC23 last build
 
