@@ -7,7 +7,6 @@ services:
       - rpm7:/home/centos/rpmbuild/RPMS
     build:
       context: .
-    image: rpmbuild:7-perlcryptblowfish
   perlmd5:
     command: /usr/bin/rpmbuild -ba perl-MD5.spec
     volumes:
@@ -15,7 +14,6 @@ services:
       - rpm7:/home/centos/rpmbuild/RPMS
     build:
       context: .
-    image: rpmbuild:7-perlmd5
   perlmcrypt:
     command: /usr/bin/rpmbuild -ba perl-Mcrypt.spec
     volumes:
@@ -24,7 +22,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.mcrypt
-    image: rpmbuild:7-perlmcrypt
 
 volumes:
   rpms:
