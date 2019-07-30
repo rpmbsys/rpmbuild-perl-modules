@@ -33,9 +33,6 @@ services:
       context: .
       dockerfile: Dockerfile.uuid
 
-# Requires: perl-Socket6 >= 0.28
-# Requires: perl-IO-Socket-INET6 >= 2.72
-
 volumes:
   rpms:
     name: rpms
