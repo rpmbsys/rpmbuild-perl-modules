@@ -49,8 +49,8 @@ port)
 any build repo):
 
     ```
-    git clone --recursive git@gitlab1.carrierzone.com:web-ongoing/build/perl-modules.git
-    cd perl-modules
+    git clone --recursive git@github.com:aursu/rpmbuild-perl-modules.git
+    cd rpmbuild-perl-modules
     ```
 
 2. Setup build environment:
@@ -65,8 +65,8 @@ any build repo):
 https://github.com/aursu/docker-rpmbuild/blob/master/README for details)
 
     ```
-    [aursu@envy perl-modules]$ docker-compose -f rpmbuild/docker-compose.yml up -d
-    [aursu@envy perl-modules]$ docker ps
+    [aursu@envy rpmbuild-perl-modules]$ docker-compose -f rpmbuild/docker-compose.yml up -d
+    [aursu@envy rpmbuild-perl-modules]$ docker ps
     CONTAINER ID        IMAGE                 COMMAND                  CREATED              STATUS              PORTS                NAMES
     b7d45e6da842        rpmbuild:webrepo      "/usr/sbin/httpd -DF"   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp   rpmbuild_webrepo_1
     cda096b8ca05        rpmbuild:createrepo   "/bin/sh -c /usr/loc"   About a minute ago   Up 42 seconds                            rpmbuild_centos7repo_1
@@ -78,16 +78,16 @@ https://github.com/aursu/docker-rpmbuild/blob/master/README for details)
 ### Build process
 
 
-1. Build images
+1. Build base image
 
     ```
-    docker-compose build
+    docker-compose -f docker-compose.base.yml build
     ```
 
 2. Build packages
 
     ```
-    docker-compose up -d
+    docker-compose up --build -d
     ```
 
     command above will start all build serrvices in background. But it is possible
@@ -107,6 +107,7 @@ To complete all build processes run commands:
 
 ```
 docker-compose down
+docker-compose -f docker-compose.base.yml down
 docker-compose -f rpmbuild/docker-compose.yml down
 ```
 
