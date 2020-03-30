@@ -1,34 +1,38 @@
-version: 2
-jobs:
-  build:
-    machine:
-      image: ubuntu-1604:201903-01
-    environment:
-      BINTRAY_REPO: custom
-      PACKAGE_VCS_URL: https://github.com/aursu/rpmbuild-perl-modules
-    steps:
-      - checkout
-      - run:
-          name: Git submodules sync
-          command: |
-            git submodule sync
-            git submodule update --init
-      - run:
-          name: Pull images for RPM build docker services
-          command: docker-compose -f rpmbuild/docker-compose.bintray.yml pull
-      - run:
-          name: Build docker images
-          command: |
-            docker-compose -f docker-compose.base.yml build
-            docker-compose build --no-cache
-      - run:
-          name: Build packages
-          command: docker-compose up
-      - run:
-          name: Upload packages into Bintray
-          command: |
-            docker-compose -f rpmbuild/docker-compose.bintray.yml run --rm \
-              -e BINTRAY_USER=$BINTRAY_USER \
-              -e BINTRAY_API_KEY=$BINTRAY_API_KEY \
-              -e BINTRAY_REPO=$BINTRAY_REPO \
-              -e PACKAGE_VCS_URL=$PACKAGE_VCS_URL centos7bintray
+version: 2.1
+
+orbs:
+  docker-rpmbuild: aursu/rpmbuild@1.0.1
+
+workflows:
+  perlmods:
+    jobs:
+      - docker-rpmbuild/rpmbuild:
+          name: perlcryptblowfish
+          base_service: centos7perlbase
+          build_service: perlcryptblowfish
+          bintray_uploader: centos7bintray
+      - docker-rpmbuild/rpmbuild:
+          name: perlmd5
+          base_service: centos7perlbase
+          build_service: perlmd5
+          bintray_uploader: centos7bintray
+      - docker-rpmbuild/rpmbuild:
+          name: perlmcrypt
+          base_service: centos7perlbase
+          build_service: perlmcrypt
+          bintray_uploader: centos7bintray
+      - docker-rpmbuild/rpmbuild:
+          name: perluuid
+          base_service: centos7perlbase
+          build_service: perluuid
+          bintray_uploader: centos7bintray
+      - docker-rpmbuild/rpmbuild:
+          name: perlcryptx
+          base_service: centos7perlbase
+          build_service: perlcryptx
+          bintray_uploader: centos7bintray
+      - docker-rpmbuild/rpmbuild:
+          name: centos6perlcryptx
+          base_service: centos6perlbase
+          build_service: centos6perlcryptx
+          bintray_uploader: centos6bintray
