@@ -2,6 +2,16 @@
 
 [![CircleCI](https://circleci.com/gh/aursu/rpmbuild-perl-modules.svg?style=svg)](https://circleci.com/gh/aursu/rpmbuild-perl-modules)
 
+[ ![perl-MD5](https://api.bintray.com/packages/aursu/custom/perl-MD5/images/download.svg) ](https://bintray.com/aursu/custom/perl-MD5/_latestVersion)
+
+[ ![perl-Crypt-Blowfish](https://api.bintray.com/packages/aursu/custom/perl-Crypt-Blowfish/images/download.svg) ](https://bintray.com/aursu/custom/perl-Crypt-Blowfish/_latestVersion)
+
+[ ![perl-Mcrypt](https://api.bintray.com/packages/aursu/custom/perl-Mcrypt/images/download.svg) ](https://bintray.com/aursu/custom/perl-Mcrypt/_latestVersion)
+
+[ ![perl-UUID](https://api.bintray.com/packages/aursu/custom/perl-UUID/images/download.svg) ](https://bintray.com/aursu/custom/perl-UUID/_latestVersion)
+
+[ ![perl-CryptX](https://api.bintray.com/packages/aursu/custom/perl-CryptX/images/download.svg) ](https://bintray.com/aursu/custom/perl-CryptX/_latestVersion)
+
 Sections `Prerequisites` and `Setup` should be done only once per build host
 
 ### Requirements
