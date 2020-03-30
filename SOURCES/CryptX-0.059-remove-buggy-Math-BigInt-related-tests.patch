@@ -1,0 +1,104 @@
+From 9b655434721db4608c403f3ec1bf3ed90d45fb42 Mon Sep 17 00:00:00 2001
+From: Karel Miko <karel.miko@gmail.com>
+Date: Fri, 27 Apr 2018 19:01:54 +0200
+Subject: [PATCH] remove buggy Math::BigInt related tests
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Petr Písař <ppisar@redhat.com>
+---
+ t/mbi_ltm/bigfltpm.inc | 3 ---
+ t/mbi_ltm/bigintpm.inc | 5 -----
+ t/mbi_ltm_bigfltpm.t   | 2 +-
+ t/mbi_ltm_bigintpm.t   | 2 +-
+ t/mbi_ltm_bugs.t       | 2 +-
+ 5 files changed, 3 insertions(+), 11 deletions(-)
+
+diff --git a/t/mbi_ltm/bigfltpm.inc b/t/mbi_ltm/bigfltpm.inc
+index 10d05137..97e7cdca 100644
+--- a/t/mbi_ltm/bigfltpm.inc
++++ b/t/mbi_ltm/bigfltpm.inc
+@@ -950,9 +950,6 @@ NaN:21:NaN
+ abc:123.456:NaN
+ 123.456:abc:NaN
+ +inf:123.45:inf
+--inf:123.45:-inf
+-+inf:-123.45:inf
+--inf:-123.45:-inf
+ -2:2:4
+ -2:3:-8
+ -2:4:16
+diff --git a/t/mbi_ltm/bigintpm.inc b/t/mbi_ltm/bigintpm.inc
+index 0798e544..35efeca4 100644
+--- a/t/mbi_ltm/bigintpm.inc
++++ b/t/mbi_ltm/bigintpm.inc
+@@ -2651,26 +2651,21 @@ abc:12:NaN
+ +inf:1234500012:inf
+ -inf:1234500012:inf
+ -inf:1234500013:-inf
+-+inf:-12345000123:inf
+--inf:-12345000123:-inf
+ #  -inf * -inf = inf
+ -inf:2:inf
+ -inf:0:NaN
+ -inf:-1:0
+--inf:inf:NaN
+ 2:inf:inf
+ 2:-inf:0
+ 0:inf:0
+ 0:-inf:inf
+ -1:-inf:NaN
+ -1:inf:NaN
+--2:inf:NaN
+ -2:-inf:0
+ NaN:inf:NaN
+ NaN:-inf:NaN
+ -inf:NaN:NaN
+ inf:NaN:NaN
+-inf:-inf:NaN
+ 1:inf:1
+ 1:-inf:1
+ # 1 ** -x => 1 / (1 ** x)
+diff --git a/t/mbi_ltm_bigfltpm.t b/t/mbi_ltm_bigfltpm.t
+index 3540868a..8173e27b 100644
+--- a/t/mbi_ltm_bigfltpm.t
++++ b/t/mbi_ltm_bigfltpm.t
+@@ -7,7 +7,7 @@ use Test::More;
+ 
+ BEGIN {
+     plan skip_all => "requires Math::BigFloat 1.999715+" unless eval { require Math::BigFloat && eval($Math::BigFloat::VERSION) >= 1.999715 };
+-    plan tests => 2409            # tests in require'd file
++    plan tests => 2403            # tests in require'd file
+                   + 5;            # tests in this file
+ }
+ 
+diff --git a/t/mbi_ltm_bigintpm.t b/t/mbi_ltm_bigintpm.t
+index ebb7582e..976e7b1e 100644
+--- a/t/mbi_ltm_bigintpm.t
++++ b/t/mbi_ltm_bigintpm.t
+@@ -7,7 +7,7 @@ use Test::More;
+ 
+ BEGIN {
+   plan skip_all => "requires Math::BigInt 1.999712+" unless eval { require Math::BigInt && eval($Math::BigInt::VERSION) >= 1.999712 };
+-  plan tests => 3722            # tests in require'd file
++  plan tests => 3712            # tests in require'd file
+                  + 6;           # tests in this file
+ }
+ 
+diff --git a/t/mbi_ltm_bugs.t b/t/mbi_ltm_bugs.t
+index ebb7582e..976e7b1e 100644
+--- a/t/mbi_ltm_bugs.t
++++ b/t/mbi_ltm_bugs.t
+@@ -7,7 +7,7 @@ use Test::More;
+ 
+ BEGIN {
+   plan skip_all => "requires Math::BigInt 1.999712+" unless eval { require Math::BigInt && eval($Math::BigInt::VERSION) >= 1.999712 };
+-  plan tests => 3722            # tests in require'd file
++  plan tests => 3712            # tests in require'd file
+                  + 6;           # tests in this file
+ }
+ 
+-- 
+2.14.3
+

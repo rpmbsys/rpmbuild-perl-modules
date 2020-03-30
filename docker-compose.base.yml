@@ -5,3 +5,10 @@ services:
       context: .
       dockerfile: Dockerfile.base
     image: aursu/perlbuild:7-base
+  centos6perlbase:
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+      args:
+        centos: $OS6
+    image: aursu/perlbuild:6-base

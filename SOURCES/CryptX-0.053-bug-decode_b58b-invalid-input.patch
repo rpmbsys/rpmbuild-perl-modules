@@ -1,0 +1,59 @@
+From 42d0cc85f7db65f46cc32226e324b848d09fd364 Mon Sep 17 00:00:00 2001
+From: Karel Miko <karel.miko@gmail.com>
+Date: Tue, 27 Feb 2018 00:57:03 +0100
+Subject: [PATCH] bug: decode_b58b + invalid input
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Petr Písař: Ported from:
+
+commit 34a3f543cc55e8f329b96b4311b85d63c30cf119
+Author: Karel Miko <karel.miko@gmail.com>
+Date:   Tue Feb 27 00:57:03 2018 +0100
+
+    bug: decode_b58b + invalid input
+
+Signed-off-by: Petr Písař <ppisar@redhat.com>
+---
+ lib/Crypt/Misc.pm | 2 +-
+ t/crypt-misc.t    | 6 ++++--
+ 2 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/lib/Crypt/Misc.pm b/lib/Crypt/Misc.pm
+index 167fbba..9bd0223 100644
+--- a/lib/Crypt/Misc.pm
++++ b/lib/Crypt/Misc.pm
+@@ -80,7 +80,7 @@ sub _decode_b58 {
+ 
+   my $default = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv";
+   if (defined $alphabet) {
+-    return undef if $alphabet !~ /^[a-zA-Z0-9]{58}$/;
++    return undef if $alphabet !~ /^[a-zA-Z0-9]{58}$/ || $base58 !~ /^[$alphabet]+$/;
+     eval "\$base58 =~ tr/$alphabet/$default/"; # HACK: https://stackoverflow.com/questions/11415045/using-a-char-variable-in-tr
+     return undef if $@;
+   }
+diff --git a/t/crypt-misc.t b/t/crypt-misc.t
+index 46fe739..d8892f3 100644
+--- a/t/crypt-misc.t
++++ b/t/crypt-misc.t
+@@ -1,6 +1,6 @@
+ use strict;
+ use warnings;
+-use Test::More tests => 679;
++use Test::More tests => 680;
+ 
+ use Crypt::Misc qw( encode_b64   decode_b64
+                     encode_b64u  decode_b64u
+@@ -142,4 +142,6 @@ for my $h (@hex) {
+   is(unpack("H*", decode_b32b(encode_b32b($b))), $h);
+   is(unpack("H*", decode_b32z(encode_b32z($b))), $h);
+   is(unpack("H*", decode_b32c(encode_b32c($b))), $h);
+-}
+\ No newline at end of file
++}
++
++is(decode_b58b("111OIl0"), undef, "bug: decode_b58b + invalid input");
+-- 
+2.13.6
+

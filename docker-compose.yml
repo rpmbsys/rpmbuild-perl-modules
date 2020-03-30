@@ -32,9 +32,29 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.uuid
+  perlcryptx:
+    command: /usr/bin/rpmbuild -ba perl-CryptX.spec
+    volumes:
+      - rpms:/home/centos/rpmbuild/SRPMS
+      - rpm7:/home/centos/rpmbuild/RPMS
+    build:
+      context: .
+      dockerfile: Dockerfile.cryptx
+  centos6perlcryptx:
+    command: /usr/bin/rpmbuild -ba perl-CryptX.spec
+    volumes:
+      - rpms:/home/centos/rpmbuild/SRPMS
+      - rpm6:/home/centos/rpmbuild/RPMS
+    build:
+      context: .
+      dockerfile: Dockerfile.cryptx
+      args:
+        centos: 6
 
 volumes:
   rpms:
     name: rpms
   rpm7:
     name: rpm7
+  rpm6:
+    name: rpm6

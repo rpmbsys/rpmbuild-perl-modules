@@ -1,0 +1,20 @@
+ARG centos=7
+FROM aursu/perlbuild:${centos}-base
+
+RUN yum -y install \
+        perl-Cpanel-JSON-XS \
+        perl-Test-Pod \
+        perl-generators \
+    && yum clean all && rm -rf /var/cache/yum
+
+RUN yum -y --enablerepo bintray-custom install \
+        libtomcrypt-devel \
+        libtommath-devel \
+    && yum clean all && rm -rf /var/cache/yum
+
+COPY SOURCES ${BUILD_TOPDIR}/SOURCES
+COPY SPECS ${BUILD_TOPDIR}/SPECS
+
+RUN chown -R $BUILD_USER ${BUILD_TOPDIR}/{SOURCES,SPECS}
+
+USER $BUILD_USER
