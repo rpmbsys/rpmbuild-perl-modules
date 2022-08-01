@@ -20,10 +20,6 @@ jobs:
         base: [centos7perlbase]
         build: [perlcryptblowfish, perlmd5, perlmcrypt, perluuid, perlcryptx]
         uploader: [centos7bintray]
-        include:
-          - base: centos6perlbase
-            build: centos6perlcryptx
-            uploader: centos6bintray
     env:
       BUILD_COMPOSE_FILE: ${{ matrix.compose-file }}
       BASE: ${{ matrix.base }}
