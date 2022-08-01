@@ -1,4 +1,5 @@
-FROM aursu/perlbuild:7-base
+ARG centos=7.9.2009
+FROM aursu/perlbuild:${centos}-base
 
 COPY SOURCES ${BUILD_TOPDIR}/SOURCES
 COPY SPECS ${BUILD_TOPDIR}/SPECS

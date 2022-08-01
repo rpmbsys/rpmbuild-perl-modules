@@ -1,14 +1,9 @@
-version: "3.4"
+version: "3"
 services:
   centos7perlbase:
     build:
       context: .
       dockerfile: Dockerfile.base
-    image: aursu/perlbuild:7-base
-  centos6perlbase:
-    build:
-      context: .
-      dockerfile: Dockerfile.base
       args:
-        centos: $OS6
-    image: aursu/perlbuild:6-base
+        centos: $OS7
+    image: "aursu/perlbuild:${OS7}-base"

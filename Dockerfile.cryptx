@@ -1,4 +1,4 @@
-ARG centos=7
+ARG centos=7.9.2009
 FROM aursu/perlbuild:${centos}-base
 
 RUN yum -y install \
